@@ -1,0 +1,6 @@
+Scripts to analyse fish behavior from CRITTA data
+1. LoadData and GetFishTrace - load necessary data from individual fish files in directory to one matrix
+2. Plot_Mean_Heatmap - plots heatmap of fish positions
+3. distance_from_source - gets distance of fish from odor source
+4. get_distance_from_tankedge - finds distance of fish from the edge fo tank to calculate thigmotaxis
+

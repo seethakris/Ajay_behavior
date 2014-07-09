@@ -39,6 +39,7 @@ for ii = 1:length(Fish_Data.Fish)
     distances(:,3) = sqrt((X-left_tank(1,:)).^2 + (Y-left_tank(2,:)).^2);
     distances(:,4) = sqrt((X-right_tank(1,:)).^2 + (Y-right_tank(2,:)).^2);
     
+    %get minimum distance from the edges 
     [minimum_dist, minimum_dist_idx] =  min(distances, [], 2);
     Dat(ii).mean_dist = mean(minimum_dist);
     Dat(ii).median_dist = median(minimum_dist);
@@ -54,7 +55,6 @@ for kk = 1:length(Temp_Dat)
     end
 end
 
-%Save as excel
 [nrows,ncols]= size(Xls_Dat);
 filename = [PathName,'Distance_from_tankedge.xls'];
 fid = fopen(filename, 'w+');

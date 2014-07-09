@@ -40,7 +40,37 @@ for ii = 1:length(Fish_Data.Fish)
     distances(:,4) = sqrt((X-right_tank(1,:)).^2 + (Y-right_tank(2,:)).^2);
     
     [minimum_dist, minimum_dist_idx] =  min(distances, [], 2);
+    Dat(ii).mean_dist = mean(minimum_dist);
+    Dat(ii).median_dist = median(minimum_dist);
+    
 end
+
+%Save files in excel
+Temp_Dat = fieldnames(Dat);
+for kk = 1:length(Temp_Dat)
+    Xls_Dat{1,kk} = Temp_Dat{kk};
+    for jj = 1:length(Dat)
+        Xls_Dat{jj+1,kk} = eval(['Dat(jj).',Temp_Dat{kk}]);
+    end
+end
+
+%Save as excel
+[nrows,ncols]= size(Xls_Dat);
+filename = [PathName,'Distance_from_tankedge.xls'];
+fid = fopen(filename, 'w+');
+
+for col = 1:ncols
+    fprintf(fid, '%s\t', Xls_Dat{1,col});
+end
+
+for row = 2:nrows
+    fprintf(fid, '\n');
+    for col = 1:ncols
+        fprintf(fid, '%3.3f\t', Xls_Dat{row,col});
+    end
+end
+
+fclose(fid);
 
 
 
